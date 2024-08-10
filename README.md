@@ -104,9 +104,6 @@ Hasil rekomendasi film dengan inputan `Danur`
 # Evaluasi
 Untuk melakukan evaluase terhadap hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan. 
 
-Rumus _Precision_: $\dfrac{n}{i}$ 
-- n: Jumlah rekomendasi yang sesuai
-- i: Jumlah rekomendasi yang diberikan
 Dari hasil prediksi yang diberikan dengan fungsi yang telah dibuat sebelumnya dengan menampilkan film yang mirip dengan film `Danur` terdapat 10 dari 10 film yang sesuai. Maka dapat dihitung precision yang didapat adalah 100%.
 # References
 1. Tie-min, M., Xue, W., Fu-cai, Z. , Shuang, W., 2020. Research on diversity and accuracy of the recommendation system based on multi-objective optimization. Neural Computing and Applications.
