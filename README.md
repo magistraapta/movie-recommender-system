@@ -22,6 +22,7 @@ Data yang digunakan merupakan data yang didapatkan dari [Kaggle](https://www.kag
 | title     | year | certificate | duration | genre                 | rating | description                                       | stars                                             | votes   |
 | --------- | ---- | ----------- | -------- | --------------------- | ------ | ------------------------------------------------- | ------------------------------------------------- | ------- |
 | Cobra Kai | 2018 | TV-14       | 30 min   | Action, Comedy, Drama | 3.8    | Decades after their 1984 All Valley Karate Tou... | ['Ralph Macchio, ', 'William Zabka, ', 'Courtn... | 177,031 |
+
 Kolom yang ada dari dataset adalah sebagai berikut:
 - title: judul film
 - year: tahun rilis film
@@ -68,6 +69,7 @@ Dalam membuat sistem rekomendasi flm, kolom description digunakan untuk menemuka
 | Soni                 | 0.000000 | 0.000000 | 0.000000 |
 | Sijipeuseu: The Myth | 0.000000 | 0.000000 | 0.000000 |
 | Shattered            | 0.000000 | 0.000000 | 0.000000 |
+
 ## Derajat kemiripan dengan Cosine Similarity
 Setelah berhasil mengidentifikasi kemiripan antara judul dengan genre. Maka perlu dilakukan untuk menghitung derajat kemiripan dengan Cosine Similarity antar judul film.
 
@@ -75,6 +77,7 @@ Setelah berhasil mengidentifikasi kemiripan antara judul dengan genre. Maka perl
 | ------------------------------------ | ----------------- | ------------ |
 | Never Have I Ever                    | 0.702260          | 0.262653     |
 | Dana Carvey: Straight White Male, 60 | 0.532369          | 0.000000     |
+
 Pada tabel diatas kita bisa melihat bahwa nilai kesamaan antar judul film. Jika dilihat judul film `Never Have I Ever` memiliki nilai kemiripan dengan film `Republic of Doyle` sebesar 0.702260.
 
 Setelah melakukan vektorisasi pada kolom description dan menghitung derajat kemiripan antar judul film menggunakan Cosine Similarity. Kita perlu mengecek hasil rekomendasi dengan membuat fungsi yang dapat menerima inputan berupa `judul_film, similarity_data, items, dan k` dengan definisi masing-masing sebagai berikut:
@@ -97,6 +100,7 @@ Hasil rekomendasi film dengan inputan `Danur`
 | The Amityville Haunting               | Horror |
 | Nini Thowok                           | Horror |
 | At the Devil's Door                   | Horror |
+
 # Evaluasi
 Untuk melakukan evaluase terhadap hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan. 
 
