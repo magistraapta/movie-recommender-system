@@ -81,7 +81,8 @@ Hasil rekomendasi film dengan inputan `Danur`
 # Evaluasi
 Projek ini telah berhasil membuat sebuah sistem rekomendasi menggunaka metode Content-Based Filtering dengan menggunakan TF-IDF untuk melakukan vektorisasi dan Cosine Similarity untuk menemukan derajat kemiripan antar judul film dan membuat sebuah fungsi yang dapat menampilkan beberapa rekomendasi film sesuai dengan input yang diberikan.
 
-Untuk mengukur hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan. 
+Untuk mengukur hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan.
+
 $Precision = \dfrac{i}{n}$
  - i: Film yang relevan dengan inputan pada fungsi rekomendasi
  - n: total film yang diberikan
