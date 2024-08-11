@@ -1,20 +1,19 @@
 # Latar Belakang
-Perkembangan penggunaan data pada industri sudah sangat berkembang, data berasal dari mana saja dan siapa saja. Data digunakan untuk memberikan informasi untuk suatu organisasi atau individu. Berbagai perusahaan telah memanfaatkan perkembangan data dengan membuat sistem rekomendasi yang dapat memberikan rekomendasi terhadap pengguna lebih personal.
+Dalam industri teknologi, sistem rekomendasi telah digunakan oleh banyak perusahaan agar dapat meningkatkan peluang pengguna untuk melakukan transaksi dengan memberikan rekomendasi yang sesuai dengan pengguna butuhkan. Dalam topik sistem rekomendasi, Content-Based Filtering menjadi sesuatu yang cukup sering dibahas [1].
 
-Dalam industri sistem rekomendasi telah digunakan oleh banyak perusahaan agar dapat meningkatkan peluang pengguna untuk melakukan transaksi dengan memberikan rekomendasi yang sesuai dengan pengguna butuhkan. Dalam topik sistem rekomendasi, Content-Based Filtering menjadi sesuatu yang cukup sering dibahas [1].
+Sejak beberapa tahun terakhir kebiasaan orang untuk menonton film melalui TV atau Bioskop telah berpindah ke aplikasi seperti Netflix, Amazon Prime Videos, dan Disney+. Banyak orang memilih untuk menonton film favorit mereka melalui platform tersebut dikarenakan platform tersebut menyediakan layanan bebas iklan, dapat ditonton di mana saja, dan yang paling terpenting adalah platform tersebut memiliki sistem rekomendasi yang dapat meningkatkan engagement terhadap pengguna yang menggunakan platform tersebut [2]. 
 
-Sebagai contoh Netflix menggunakan sistem rekomendasi untuk memberikan rekomendasi film yang sesuai dengan kesukaan pengguna. Hal tersebut dapat membantu pengguna agar tidak perlu mencari film yang ingin ditonton dan dapat meningkatkan transaksi *subscription* Netflix dikarenakan sistem rekomendasi telah menciptakan rekomendasi film yang *personalized* dengan kesukaan pengguna
-
+Dengan persaingan yang semakin ketat antar platform tersebut, dibutuhkan sebuah sistem rekomendasi yang kokoh untuk menunjang kesuksesan platform. Pada era di mana pengguna bisa memilih banyak film dan series yang tersedia dalam platform maka dibutuhkan sebuah sistem yang dapat merekomendasikan tontonan kepada pengguna agar pengguna tidak perlu menghabiskan waktu untuk mencari tontonan.
 # Business Understanding
 Dengan latar belakang tersebut maka perlu dilakukan *busines understanding* dengan mengidentifikasi masalah yang dihadapi dan tujuan yang ingin dicapai dengan membuat sistem rekomendasi Netflix.
 ## Problem Statements
 Berdasarkan *Business Understanding* tersebut, maka didapatkan *Problem Statement* sebagai berikut:
-- Bagaimana cara membuat sebuah rekomendasi sistem menggunakan Content-Based Filtering dan Collaborative Filtering?
-- Bagaimana Performa Content-Based Filtering dibandingkan Collaborative Filtering dalam memberikan rekomendasi kepada pengguna?
+- Bagaimana cara membuat sebuah rekomendasi sistem menggunakan Content-Based Filtering yang dapat sesuai dengan prefensi pengguna?
+- Bagaimana hasil evaluasi sistem rekomendasi menggunakan Content-Based Filtering?
 ## Goals
 Berdasarkan *Problem Statement* di atas, maka didapatkan *Goals* sebagai berikut:
-- Membuat sebuah rekomendasi sistem dengan menggunakan metode Content-Based Filtering dan Collaborative Filtering
-- Memberikan rekomendasi film kepada pengguna
+- Membuat sebuah rekomendasi sistem dengan menggunakan metode Content-Based Filtering.
+- Mengevaluasi hasil sistem rekomendasi menggunakan metode Content-Based Filtering.
 # Data Understanding
 Data yang digunakan merupakan data yang didapatkan dari [Kaggle](https://www.kaggle.com/datasets/narayan63/netflix-popular-movies-dataset). Data tersebut berisikan 9957 baris dengan 9 kolom yang terdiri dari:
 ## Dataset Sample
@@ -34,16 +33,9 @@ Kolom yang ada dari dataset adalah sebagai berikut:
 - stars: pemain yang ada pada film
 - votes: jumlah suara dari pengguna yang telah memberikan rating
 # Data Preperation
-## Langkah-langkah pemrosesan data:
-- Mengecek missing value pada dataset
-- Menghapus data yang memiliki missing value
-- Mengecek duplikasi pada dataset
-### Check missing Value
-Sebelum menggunakan dataset kita perlu mengecek missing value yang ada pada dataset. Kita bisa menggunakan kode seperti berikut:
-```Python
-movies.isna().sum()
-```
-Output:
+Dalam tahap Data Prepertation teknik yang digunakan adalah sebagai berikut:
+## Drop Missing Value
+Pada dataset `movies` terdapat beberapa missing value seperti berikut:
 title             0
 year            527
 certificate    3453
@@ -53,57 +45,48 @@ rating         1173
 description       0
 stars             0
 votes          1173
-dtype: int64
+Karena missing value dapat mempengaruhi performa dari sistem rekomendasi, maka salah satu cara untuk mengatasi missing value adalah dengan menghapus data yang memiliki missing value dengan menggunakan `dropna()`.
 
-Dari dataset yang digunakan terdapat beberapa data yang memiliki missing value, agar hasil rekomendasi dapat memberikan hasil yang optimal maka kita perlu men-drop data yang mengandung missing value dengan kode berikut:
 ```Python
 movies.dropna(inplace=True)
 ```
-# Modelling
 ## Vektorisasi Menggunakan TF-IDF
 Dalam membuat sistem rekomendasi flm, kolom description digunakan untuk menemukan kemiripan antara satu film dengan film lainnya, agar dapat menemukan nilai dari kemiripan tersebut maka perlu dilakukan vektorisasi nilai dari kolom description menggunakan TF-IDF. 
 
-|                      | thriller | drama    | romance  |
-| -------------------- | -------- | -------- | -------- |
-| Puffin Rock          | 0.000000 | 0.000000 | 0.000000 |
-| Soni                 | 0.000000 | 0.000000 | 0.000000 |
-| Sijipeuseu: The Myth | 0.000000 | 0.000000 | 0.000000 |
-| Shattered            | 0.000000 | 0.000000 | 0.000000 |
+TF-IDF merupakan suatu algortima yang digunakan untuk menemukan kata-kata yang penting pada corpus. TF merepresentasikan frekuensi dari kata yang muncul, frekuensi tiap kata didapatkan dengan menghitung jumlah kemunculan suatu kata dari total jumlah kata yang ada pada corpus. Sedankgan IDF mengukur seberapa penting suatu kata di dalam corpus.
 
+Projek ini menggunakan `TfidfVectorizer()` dari library `Scikit-learn` untuk mengubah fitur `genre` pada dataset menjadi sebuah vektor dan hasil vectorizer ditampilkan dalam gambar berikut.
+
+![Vektorisasi dengan tfidf](https://github.com/user-attachments/assets/b3cb8613-d815-4aa1-a702-bd4d4c6d4423)
+# Modelling
 ## Derajat kemiripan dengan Cosine Similarity
-Setelah berhasil mengidentifikasi kemiripan antara judul dengan genre. Maka perlu dilakukan untuk menghitung derajat kemiripan dengan Cosine Similarity antar judul film.
+Cosine Similarity adalah sebuah algoritma yang digunakan untuk menemukan kemiripan menggunakan derajat cos dari dua buah vektor A dan B, yang di mana dapat direpresentasikan sebagai kata, kalimat, hingga paragraf [3]. 
 
-| title                                | Republic of Doyle | The Playlist |
-| ------------------------------------ | ----------------- | ------------ |
-| Never Have I Ever                    | 0.702260          | 0.262653     |
-| Dana Carvey: Straight White Male, 60 | 0.532369          | 0.000000     |
+$\cos \theta = \dfrac{A.B}{||A||||B||}$
+
+Berikut adalah hasil Cosine Similarity antar judul film pada dataset:
+
+![Table Cosine Similarity](https://github.com/user-attachments/assets/acd03acc-45db-4708-a6cf-7b5c5c2af2bf)
 
 Pada tabel diatas kita bisa melihat bahwa nilai kesamaan antar judul film. Jika dilihat judul film `Never Have I Ever` memiliki nilai kemiripan dengan film `Republic of Doyle` sebesar 0.702260.
-
-Setelah melakukan vektorisasi pada kolom description dan menghitung derajat kemiripan antar judul film menggunakan Cosine Similarity. Kita perlu mengecek hasil rekomendasi dengan membuat fungsi yang dapat menerima inputan berupa `judul_film, similarity_data, items, dan k` dengan definisi masing-masing sebagai berikut:
+## Fungsi Rekomendasi
+Setelah melakukan vektorisasi dengan fitur `genre` dan menghitung derajat kemiripan antar judul film menggunakan Cosine Similarity. Kita perlu mengecek hasil rekomendasi dengan membuat fungsi yang dapat menerima inputan berupa `judul_film, similarity_data, items, dan k` dengan definisi masing-masing sebagai berikut:
 - judul_film: Merupakan judul film yang ingin dicari kesamaannya
 - similarity_data: Dataframe yang berisikan nilai kemiripan antar judul film
 - items: fitur yang digunakan untuk mendefinisikan kemiripan
 - k: jumlah rekomendasi yang ditampilkan
 
 Hasil rekomendasi film dengan inputan `Danur`
-
-| title                                 | genre  |
-| ------------------------------------- | ------ |
-| Beast of Morocco                      | Horror |
-| The Human Centipede 2 (Full Sequence) | Horror |
-| The Axe Murders of Villisca           | Horror |
-| Verónica                              | Horror |
-| Rape Zombie: Lust of the Dead         | Horror |
-| FirstBorn                             | Horror |
-| The Precipice Game                    | Horror |
-| The Amityville Haunting               | Horror |
-| Nini Thowok                           | Horror |
-| At the Devil's Door                   | Horror |
-
+![Table rekomendasi film](https://github.com/user-attachments/assets/09837b4d-be7c-4869-8249-63c6547c4453)
 # Evaluasi
-Untuk melakukan evaluase terhadap hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan. 
+Projek ini telah berhasil membuat sebuah sistem rekomendasi menggunaka metode Content-Based Filtering dengan menggunakan TF-IDF untuk melakukan vektorisasi dan Cosine Similarity untuk menemukan derajat kemiripan antar judul film dan membuat sebuah fungsi yang dapat menampilkan beberapa rekomendasi film sesuai dengan input yang diberikan.
 
+Untuk mengukur hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat sebelumnya dapat digunakan Precision untuk mengukur seberapa akurat hasil rekomendasi yang diberikan. 
+$Precision = \dfrac{i}{n}$
+ - i: Film yang relevan dengan inputan pada fungsi rekomendasi
+ - n: total film yang diberikan
 Dari hasil prediksi yang diberikan dengan fungsi yang telah dibuat sebelumnya dengan menampilkan film yang mirip dengan film `Danur` terdapat 10 dari 10 film yang sesuai. Maka dapat dihitung precision yang didapat adalah 100%.
 # References
 1. Tie-min, M., Xue, W., Fu-cai, Z. , Shuang, W., 2020. Research on diversity and accuracy of the recommendation system based on multi-objective optimization. Neural Computing and Applications.
+2. Kaur, H., & Ashfaq, R. (2023). The impact of Netflix on viewer behaviour and media consumption: An exploration of the effects of streaming services on audience engagement and entertainment preferences. _Journal of Media, Culture and Communication_, 3(4), 9-10.
+3. Yunxiang, L., Qi, X., Zhang, T., 2020. Research on Text Classification Method based on PTF-IDF and Cosine Similarity. Journal of Information and Communication Engineering: Volume 6 pp. 335-338 (Issue 1).
