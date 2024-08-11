@@ -85,6 +85,7 @@ Untuk mengukur hasil yang diberikan oleh fungsi rekomendasi yang telah dibuat se
 $Precision = \dfrac{i}{n}$
  - i: Film yang relevan dengan inputan pada fungsi rekomendasi
  - n: total film yang diberikan
+
 Dari hasil prediksi yang diberikan dengan fungsi yang telah dibuat sebelumnya dengan menampilkan film yang mirip dengan film `Danur` terdapat 10 dari 10 film yang sesuai. Maka dapat dihitung precision yang didapat adalah 100%.
 # References
 1. Tie-min, M., Xue, W., Fu-cai, Z. , Shuang, W., 2020. Research on diversity and accuracy of the recommendation system based on multi-objective optimization. Neural Computing and Applications.
