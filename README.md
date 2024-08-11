@@ -91,7 +91,7 @@ Dari hasil prediksi yang diberikan dengan fungsi yang telah dibuat sebelumnya de
 
 # Conclusion
 Dari projek yang telah dilakukan, maka dapat diambil kesimpulan sebagai berikut:
-- Telah berhasil membuat sistem rekomendasi menggunakan Content-Based Filtering dengan menggunakan TfidfVectorizet dan Cosine Similarity untuk menemukan derajat kemiripan antar judul film.
+- Telah berhasil membuat sistem rekomendasi menggunakan Content-Based Filtering dengan menggunakan TfidfVectorizer dan Cosine Similarity untuk menemukan derajat kemiripan antar judul film.
 - Setelah berhasil membuat sistem rekomendasi, hasil evaluasi diukur dengan menggunakan precision dengan cara menghitung hasil yang sesuai dibagi dengan jumlah rekomendasi yang dihasilkan. Hasilnya, sistem rekomendasi memberikan 10 film yang relevan dengan input dari 10 film yang diberikan. Maka bisa didapatkan precision sistem rekomendasi yang telah dibuat adalah 100%.
 
 # References
