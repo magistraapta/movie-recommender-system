@@ -88,6 +88,12 @@ $Precision = \dfrac{i}{n}$
  - n: total film yang diberikan
 
 Dari hasil prediksi yang diberikan dengan fungsi yang telah dibuat sebelumnya dengan menampilkan film yang mirip dengan film `Danur` terdapat 10 dari 10 film yang sesuai. Maka dapat dihitung precision yang didapat adalah 100%.
+
+# Conclusion
+Dari projek yang telah dilakukan, maka dapat diambil kesimpulan sebagai berikut:
+- Telah berhasil membuat sistem rekomendasi menggunakan Content-Based Filtering dengan menggunakan TfidfVectorizet dan Cosine Similarity untuk menemukan derajat kemiripan antar judul film.
+- Setelah berhasil membuat sistem rekomendasi, hasil evaluasi diukur dengan menggunakan precision dengan cara menghitung hasil yang sesuai dibagi dengan jumlah rekomendasi yang dihasilkan. Hasilnya, sistem rekomendasi memberikan 10 film yang relevan dengan input dari 10 film yang diberikan. Maka bisa didapatkan precision sistem rekomendasi yang telah dibuat adalah 100%.
+
 # References
 1. Tie-min, M., Xue, W., Fu-cai, Z. , Shuang, W., 2020. Research on diversity and accuracy of the recommendation system based on multi-objective optimization. Neural Computing and Applications.
 2. Kaur, H., & Ashfaq, R. (2023). The impact of Netflix on viewer behaviour and media consumption: An exploration of the effects of streaming services on audience engagement and entertainment preferences. _Journal of Media, Culture and Communication_, 3(4), 9-10.
